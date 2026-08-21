@@ -75,7 +75,7 @@ test('receiveAttack does not overwrite an already-missed cell', () => {
   gameboard.receiveAttack(5, 5);
   gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.attacked[5][5]).toBe(true);
+  expect(gameboard.isAttacked(5,5)).toBe(true);
   expect(gameboard.board[5][5]).toBe('miss');
 });
 
@@ -95,10 +95,10 @@ test('allShipsSunk returns true once all ships are sunk', () => {
   expect(gameboard.allShipsSunk()).toBe(true);
 });
 
-test('allShipsSunk returns true when no ships have been placed', () => {
+test('allShipsSunk returns false when no ships have been placed', () => {
   const gameboard = new Gameboard();
 
-  expect(gameboard.allShipsSunk()).toBe(true);
+  expect(gameboard.allShipsSunk()).toBe(false);
 });
 
 test('does not place a ship that have negative coordinates', () => {

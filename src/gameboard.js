@@ -1,9 +1,11 @@
 import Ship from './ship.js';
 
 export default class Gameboard {
+    #attacked;
+
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(null));
-    this.attacked = Array.from({ length: 10 }, () => Array(10).fill(false));
+    this.#attacked = Array.from({ length: 10 }, () => Array(10).fill(false));
     this.ships = [];
   }
 
@@ -34,9 +36,9 @@ export default class Gameboard {
   }
 
   receiveAttack(row, col) {
-    if (this.attacked[row][col]) return;
+    if (this.#attacked[row][col]) return;
 
-    this.attacked[row][col] = true;
+    this.#attacked[row][col] = true;
 
     const cell = this.board[row][col];
 
@@ -51,5 +53,9 @@ export default class Gameboard {
     if (this.ships.length === 0) return false;
 
     return this.ships.every((ship) => ship.isSunk());
+  }
+
+  isAttacked(row, col) {
+    return this.#attacked[row][col];
   }
 }
