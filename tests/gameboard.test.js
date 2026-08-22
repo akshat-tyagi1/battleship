@@ -6,18 +6,18 @@ test('places a ship horizontally within bounds', () => {
   gameboard.placeShip(0, 0, 3, 'horizontal');
 
   expect(gameboard.ships.length).toBe(1);
-  expect(gameboard.board[0][0]).toBeInstanceOf(Ship);
-  expect(gameboard.board[0][1]).toBeInstanceOf(Ship);
-  expect(gameboard.board[0][2]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[0][0]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[0][1]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[0][2]).toBeInstanceOf(Ship);
 });
 
 test('places a ship vertically within bounds', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(0, 0, 3, 'vertical');
 
-  expect(gameboard.board[0][0]).toBeInstanceOf(Ship);
-  expect(gameboard.board[1][0]).toBeInstanceOf(Ship);
-  expect(gameboard.board[2][0]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[0][0]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[1][0]).toBeInstanceOf(Ship);
+  expect(gameboard.getBoard()[2][0]).toBeInstanceOf(Ship);
 });
 
 test('does not place a ship that goes out of bounds horizontally', () => {
@@ -56,7 +56,7 @@ test('receiveAttack records a miss on an empty cell', () => {
 
   gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.board[5][5]).toBe('miss');
+  expect(gameboard.getBoard()[5][5]).toBe('miss');
 });
 
 test('receiveAttack does not register a second hit on an already-attacked ship cell', () => {
@@ -76,7 +76,7 @@ test('receiveAttack does not overwrite an already-missed cell', () => {
   gameboard.receiveAttack(5, 5);
 
   expect(gameboard.isAttacked(5, 5)).toBe(true);
-  expect(gameboard.board[5][5]).toBe('miss');
+  expect(gameboard.getBoard()[5][5]).toBe('miss');
 });
 
 test('allShipsSunk returns false when a ship is still afloat', () => {
