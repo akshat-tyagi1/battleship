@@ -1,5 +1,5 @@
-import Gameboard from '../src/gameboard.js';
-import Ship from '../src/ship.js';
+import Gameboard from '../src/Classes/gameboard.js';
+import Ship from '../src/Classes/ship.js';
 
 test('places a ship horizontally within bounds', () => {
   const gameboard = new Gameboard();
@@ -75,7 +75,7 @@ test('receiveAttack does not overwrite an already-missed cell', () => {
   gameboard.receiveAttack(5, 5);
   gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.isAttacked(5,5)).toBe(true);
+  expect(gameboard.isAttacked(5, 5)).toBe(true);
   expect(gameboard.board[5][5]).toBe('miss');
 });
 

@@ -1,4 +1,4 @@
-import Ship from '../src/ship.js';
+import Ship from '../src/Classes/ship.js';
 
 test('Ship has 0 hits initially', () => {
   const ship = new Ship(2);
@@ -14,31 +14,31 @@ test('Hits increase on calling hit', () => {
 });
 
 test('Is ship sunk 1.0', () => {
-  const ship =  new Ship(2);
+  const ship = new Ship(2);
 
   ship.hit();
 
   expect(ship.isSunk()).toBe(false);
 });
 
-test("Is ship sunk 2.0", () => {
-    const ship = new Ship(2);
+test('Is ship sunk 2.0', () => {
+  const ship = new Ship(2);
 
-    ship.hit();
-    ship.hit();
+  ship.hit();
+  ship.hit();
 
-    expect(ship.isSunk()).toBe(true)
-})
+  expect(ship.isSunk()).toBe(true);
+});
 
 test("hit count can't exceed ship length.", () => {
-    const ship = new Ship(2);
+  const ship = new Ship(2);
 
-    ship.hit();
-    ship.hit();
+  ship.hit();
+  ship.hit();
 
-    const hits = ship.getHits()
+  const hits = ship.getHits();
 
-    ship.hit();
+  ship.hit();
 
-    expect(ship.getHits()).toBe(hits);
-})
+  expect(ship.getHits()).toBe(hits);
+});

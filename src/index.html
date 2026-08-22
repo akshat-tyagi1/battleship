@@ -3,9 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webpack Template</title>
+    <title>Battleship</title>
   </head>
   <body>
-    <div id="content"></div>
+    <!-- Choose game gamemode-->
+    <dialog class="game-mode-dialog">
+      <h2>Choose Game Mode</h2>
+
+      <div class="game-mode-options">
+        <button class="mode-select-computer">Computer</button>
+        <button class="mode-select-friend">Friend</button>
+      </div>
+    </dialog>
+
+    <!-- Place Ship -->
+    <div class="place-your-ship">
+      <p>Place Your Ships</p>
+      <div class="set-player-grid"></div>
+      <div class="placing-controls">
+        <select id="ship-select"></select>
+        <select id="ship-direction">
+          <option value="horizontal">Horizontal</option>
+          <option value="vertical">Vertical</option>
+        </select>
+        <button class="place-ship-button">Place Ship</button>
+        <button class="Done">Done</button>
+      </div>
+    </div>
+
+    <!-- Gameplay-->
+    <div class="main-container">
+      <div class="header">
+        <h1>Battlesship</h1>
+      </div>
+      <div class="game-info">
+        <p class="info">
+          Hit all the squares occupied by your opponent's ships to sink them.
+          The first player to sink all of their opponent's ships wins the game.
+        </p>
+      </div>
+      <div class="boards-container">
+        <div class="player-board">
+          <div class="player-grid"></div>
+          <div class="player-ship-status"></div>
+          <p>Your Board</p>
+        </div>
+        <div class="opponent-board">
+          <div class="opponent-grid"></div>
+          <div class="opponent-ship-status"></div>
+          <p>Opponent's Board</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Result-->
+
+    <dialog class="game-result-dialog">
+      <div class="result-container">
+        <p class="game-result"></p>
+        <div class="game-mode-options">
+          <button class="replay-computer">Vs Computer</button>
+          <button class="replay-friend">Vs Friend</button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
