@@ -1,12 +1,13 @@
 import { gameInitializer, playerGrid, shipSelection } from '../index.js';
 import renderBoard from './render/renderBoard.js';
 import renderShipSelection from './render/renderShipSelection.js';
+import showPlacementError from '../error.js';
+import handlePlacementSuccess from './handlePlacementSuccess.js';
 
 const initPLacementListeners = (function () {
   // handle the placeship page event listners
 
-  let row, col, cell;
-  let selectedCell;
+  const selectionState = { row: undefined, col: undefined, cell: undefined };
 
   // assign coordinates to row and coll variables
   document
@@ -14,22 +15,21 @@ const initPLacementListeners = (function () {
     .addEventListener('click', (event) => {
       if (!event.target.classList.contains('cell')) return;
 
-      if (selectedCell) {
-        selectedCell.classList.remove('selected-cell');
+      if (selectionState.cell) {
+        selectionState.cell.classList.remove('selected-cell');
       }
 
-      selectedCell = event.target;
-      cell = selectedCell;
+      selectionState.cell = event.target;
+      selectionState.cell.classList.add('selected-cell');
 
-      cell.classList.add('selected-cell');
-
-      row = Number(cell.dataset.row);
-      col = Number(cell.dataset.col);
+      selectionState.row = Number(selectionState.cell.dataset.row);
+      selectionState.col = Number(selectionState.cell.dataset.col);
     });
 
   // place ship
   document.querySelector('.place-ship-button').addEventListener('click', () => {
-    if (row === undefined || col === undefined) return;
+    if (selectionState.row === undefined || selectionState.col === undefined)
+      return;
 
     const select = document.querySelector('#ship-select');
 
@@ -40,20 +40,36 @@ const initPLacementListeners = (function () {
     const player = gameInitializer.getPlayer();
     const gameboard = player.getGameboard();
 
-    gameboard.placeShip(row, col, length, direction);
+    const errorMessage = gameboard.canPlaceShip(
+      selectionState.row,
+      selectionState.col,
+      length,
+      direction,
+      shipName,
+    );
 
-    renderBoard(player.getGameboard(), playerGrid);
+    showPlacementError(
+      errorMessage,
+      document.querySelector('.placement-error'),
+    );
 
-    row = undefined;
-    col = undefined;
-    selectedCell = undefined;
+    if (errorMessage) return;
 
-    const index = gameInitializer
-      .getShips()
-      .findIndex((ship) => ship.name === shipName);
+    gameboard.placeShip(
+      selectionState.row,
+      selectionState.col,
+      length,
+      direction,
+      shipName,
+    );
 
-    gameInitializer.removeShip(index);
-
-    renderShipSelection(gameInitializer.getShips(), shipSelection);
+    handlePlacementSuccess(
+      gameInitializer,
+      gameboard,
+      playerGrid,
+      shipSelection,
+      shipName,
+      selectionState,
+    );
   });
 })();

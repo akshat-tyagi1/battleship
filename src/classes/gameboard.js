@@ -12,26 +12,8 @@ export default class Gameboard {
     this.ships = [];
   }
 
-  placeShip(row, col, length, direction) {
-    if (row < 0 || col < 0) return;
-
-    if (direction === 'horizontal' && col + length - 1 > 9) return;
-    if (direction === 'vertical' && row + length - 1 > 9) return;
-
-    for (let i = 0; i < length; i++) {
-      if (
-        direction === 'horizontal' &&
-        this.#board[row][col + i] !== 'unattacked'
-      ) {
-        return;
-      } else if (
-        direction === 'vertical' &&
-        this.#board[row + i][col] !== 'unattacked'
-      )
-        return;
-    }
-
-    const ship = new Ship(length);
+  placeShip(row, col, length, direction, shipName) {
+    const ship = new Ship(length, shipName);
 
     for (let i = 0; i < length; i++) {
       if (direction === 'horizontal') {
@@ -42,6 +24,35 @@ export default class Gameboard {
     }
 
     this.ships.push(ship);
+  }
+
+  canPlaceShip(row, col, length, direction, shipName) {
+    if(this.ships.some(ship => ship.getName() === shipName)) {
+      return "This ship has already placed."
+    }
+
+    if (row < 0 || col < 0) {
+      return 'Invalid coordinates.';
+    }
+
+    if (
+      (direction === 'horizontal' && col + length - 1 > 9) ||
+      (direction === 'vertical' && row + length - 1 > 9)
+    ) {
+      return "Ship doesn't fit on the board.";
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (
+        (direction === 'horizontal' &&
+          this.#board[row][col + i] !== 'unattacked') ||
+        (direction === 'vertical' && this.#board[row + i][col] !== 'unattacked')
+      ) {
+        return 'Ship overlaps another ship.';
+      }
+    }
+
+    return null;
   }
 
   receiveAttack(row, col) {

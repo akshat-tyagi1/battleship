@@ -1,8 +1,10 @@
 export default class Ship {
   #length;
   #hits;
+  #name;
 
-  constructor(length) {
+  constructor(length, name) {
+    this.#name = name;
     this.#length = length;
     this.#hits = 0;
   }
@@ -11,6 +13,10 @@ export default class Ship {
     if (this.isSunk()) return;
 
     this.#hits++;
+  }
+
+  getName() {
+    return this.#name;
   }
 
   getHits() {
