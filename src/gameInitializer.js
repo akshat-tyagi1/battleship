@@ -1,7 +1,7 @@
 import Player from './Classes/player.js';
 import { ComputerPlayer } from './Classes/player.js';
 
-export default class InitApp {
+export default class GameInitializer {
   constructor() {
     this.player = new Player();
     this.computer = new ComputerPlayer();

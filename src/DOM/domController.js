@@ -1,9 +1,12 @@
-import initApp from '..';
+import { gameInitializer, playerGrid, ships, shipSelection } from '../index.js';
+import renderBoard from './render/renderBoard.js';
+import renderShipSelection from './render/renderShipSelection.js';
 
 const placeShip = (function () {
   // handle the placeship page event listners
 
-  let row, col;
+  let row, col, cell;
+  let selectedCell;
 
   // assign coordinates to row and coll variables
   document
@@ -11,20 +14,39 @@ const placeShip = (function () {
     .addEventListener('click', (event) => {
       if (!event.target.classList.contains('cell')) return;
 
-      const cell = event.target;
-      row = cell.dataset.row;
-      col = cell.dataset.col;
+      if (selectedCell) {
+        selectedCell.classList.remove('selected-cell');
+      }
+
+      selectedCell = event.target;
+      cell = selectedCell;
+
+      cell.classList.add('selected-cell');
+
+      row = Number(cell.dataset.row);
+      col = Number(cell.dataset.col);
     });
 
   // place ship
   document.querySelector('.place-ship-button').addEventListener('click', () => {
-    const ship = document.querySelector('#select-ship').value;
-    const length = document.querySelector('#select-ship').length;
+    const shipName = document.querySelector('#ship-select').value;
+    const length = document.querySelector('#ship-select').length;
     const direction = document.querySelector('#ship-direction').value;
 
-    const player = initApp.getPlayer();
+    const player = gameInitializer.getPlayer();
     const gameboard = player.getGameboard();
-    
+
     gameboard.placeShip(row, col, length, direction);
+
+    console.log(gameboard.getCellValue(row, col));
+
+    renderBoard(player.getGameboard(), playerGrid);
+    renderBoard(player.getGameboard(), playerGrid);
+
+    const index = ships.findIndex((ship) => ship.name === shipName);
+
+    ships.splice(index, 1);
+
+    renderShipSelection(ships, shipSelection);
   });
 })();

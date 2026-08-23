@@ -4,26 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-
     <!-- Place Your Ship -->
     <div class="place-your-ship">
-      <p>Place Your Ships</p>
-      <div class="set-player-grid"></div>
-      <div class="placing-controls">
-        <select id="ship-select"></select>
-        <select id="ship-direction">
-          <option value="horizontal">Horizontal</option>
-          <option value="vertical">Vertical</option>
-        </select>
-        <button class="place-ship-button">Place Ship</button>
-        <button class="play-button">Play</button>
+      <h1 class="game-title">Battleship</h1>
+      <p class="ships-length-title">Ships Length</p>
+      <p class="ships-lengths">
+        Carrier: 5 · Battleship: 4 · Destroyer: 3 · Submarine: 3 · Patrol Boat:
+        2
+      </p>
+      <div class="place-your-ship-container">
+        <div class="set-player-grid"></div>
+        <div class="placing-controls">
+          <select id="ship-select"></select>
+          <select id="ship-direction">
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+          </select>
+          <button class="place-ship-button">Place Ship</button>
+          <button class="play-button">Play</button>
+        </div>
       </div>
+      <p>Place Your Ships</p>
     </div>
 
     <!-- Gameplay-->
-    <div class="main-container">
+    <div class="main-container hidden">
       <div class="header">
         <h1>Battlesship</h1>
       </div>
@@ -52,8 +60,10 @@
     <dialog class="game-result-dialog">
       <div class="result-container">
         <p class="game-result"></p>
-          <button class="replay">Play Again</button>
+        <button class="replay">Play Again</button>
       </div>
     </dialog>
+
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

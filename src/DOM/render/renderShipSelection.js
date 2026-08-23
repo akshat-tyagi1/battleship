@@ -1,9 +1,17 @@
 export default function renderShipSelection(ships, select) {
-  for (let i = 0; i < ships.lenght; i++) {
+  select.innerHTML = '';
+  
+  console.log(ships);
+  for (let i = 0; i < ships.length; i++) {
     const option = document.createElement('option');
+
     option.value = ships[i].name;
     option.dataset.length = ships[i].length;
-    option.textContent = ships[0][0].toUpperCase() + ships[0].slice(0);
+    option.textContent = ships[i].name
+      .split(' ')
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(' ');
+
     select.appendChild(option);
   }
 }
