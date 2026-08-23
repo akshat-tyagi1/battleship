@@ -1,8 +1,8 @@
-import { gameInitializer, playerGrid, ships, shipSelection } from '../index.js';
+import { gameInitializer, playerGrid, shipSelection } from '../index.js';
 import renderBoard from './render/renderBoard.js';
 import renderShipSelection from './render/renderShipSelection.js';
 
-const placeShip = (function () {
+const initPLacementListeners = (function () {
   // handle the placeship page event listners
 
   let row, col, cell;
@@ -29,8 +29,12 @@ const placeShip = (function () {
 
   // place ship
   document.querySelector('.place-ship-button').addEventListener('click', () => {
+    if (row === undefined || col === undefined) return;
+
+    const select = document.querySelector('#ship-select');
+
     const shipName = document.querySelector('#ship-select').value;
-    const length = document.querySelector('#ship-select').length;
+    const length = Number(select.selectedOptions[0].dataset.length);
     const direction = document.querySelector('#ship-direction').value;
 
     const player = gameInitializer.getPlayer();
@@ -38,15 +42,18 @@ const placeShip = (function () {
 
     gameboard.placeShip(row, col, length, direction);
 
-    console.log(gameboard.getCellValue(row, col));
-
-    renderBoard(player.getGameboard(), playerGrid);
     renderBoard(player.getGameboard(), playerGrid);
 
-    const index = ships.findIndex((ship) => ship.name === shipName);
+    row = undefined;
+    col = undefined;
+    selectedCell = undefined;
 
-    ships.splice(index, 1);
+    const index = gameInitializer
+      .getShips()
+      .findIndex((ship) => ship.name === shipName);
 
-    renderShipSelection(ships, shipSelection);
+    gameInitializer.removeShip(index);
+
+    renderShipSelection(gameInitializer.getShips(), shipSelection);
   });
 })();
