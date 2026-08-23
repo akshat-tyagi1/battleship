@@ -2,16 +2,35 @@ import Player from './Classes/player.js';
 import { ComputerPlayer } from './Classes/player.js';
 
 export default class GameInitializer {
+  #player;
+  #computer;
+  #ships;
+
   constructor() {
-    this.player = new Player();
-    this.computer = new ComputerPlayer();
+    this.#player = new Player();
+    this.#computer = new ComputerPlayer();
+    this.#ships = [
+      { name: 'carrier', length: 5 },
+      { name: 'battleship', length: 4 },
+      { name: 'destroyer', length: 3 },
+      { name: 'submarine', length: 3 },
+      { name: 'patrol boat', length: 2 },
+    ];
   }
 
   getPlayer() {
-    return this.player;
+    return this.#player;
   }
 
   getComputer() {
-    return this.computer;
+    return this.#computer;
+  }
+
+  getShips() {
+    return [...this.#ships];
+  }
+
+  removeShip(index) {
+    this.#ships.splice(index, 1);
   }
 }

@@ -7,16 +7,8 @@ const gameInitializer = new GameInitializer();
 const playerGrid = document.querySelector('.set-player-grid');
 const shipSelection = document.querySelector('#ship-select');
 
-const ships = [
-  { name: 'carrier', length: 5 },
-  { name: 'battleship', length: 4 },
-  { name: 'destroyer', length: 3 },
-  { name: 'submarine', length: 3 },
-  { name: 'patrol boat', length: 2 },
-];
-
 renderBoard(gameInitializer.getPlayer().getGameboard(), playerGrid);
 
-renderShipSelection(ships, shipSelection);
+renderShipSelection(gameInitializer.getShips(), shipSelection);
 
-export { gameInitializer, ships, playerGrid, shipSelection };
+export { gameInitializer, playerGrid, shipSelection };
