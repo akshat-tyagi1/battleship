@@ -5,16 +5,12 @@ export default function renderBoard(gameBoard, domElement, revealShips) {
     for (let col = 0; col < 10; col++) {
       const button = document.createElement('button');
 
-      const cellValue = gameBoard.getCellValue(row, col);
+      const cellState = gameBoard.getCellState(row, col);
 
-      button.classList.add('cell');
+      button.classList.add('cell', cellState);
 
-      if (typeof cellValue === 'string') {
-        button.classList.add(cellValue);
-      } else if (revealShips) {
+      if (revealShips && gameBoard.isShip(row, col)) {
         button.classList.add('ship');
-      } else {
-        button.classList.add('unattacked')
       }
 
       button.dataset.row = row;

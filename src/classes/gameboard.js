@@ -6,9 +6,7 @@ export default class Gameboard {
   #placedShips;
 
   constructor() {
-    this.#board = Array.from({ length: 10 }, () =>
-      Array(10).fill('unattacked'),
-    );
+    this.#board = Array.from({ length: 10 }, () => Array(10).fill(null));
     this.#attacked = Array.from({ length: 10 }, () => Array(10).fill(false));
     this.#placedShips = [];
   }
@@ -28,8 +26,8 @@ export default class Gameboard {
   }
 
   canPlaceShip(row, col, length, direction, shipName) {
-    if(this.#placedShips.some(ship => ship.getName() === shipName)) {
-      return "This ship has already placed."
+    if (this.#placedShips.some((ship) => ship.getName() === shipName)) {
+      return 'This ship has already placed.';
     }
 
     if (row < 0 || col < 0) {
@@ -45,9 +43,8 @@ export default class Gameboard {
 
     for (let i = 0; i < length; i++) {
       if (
-        (direction === 'horizontal' &&
-          this.#board[row][col + i] !== 'unattacked') ||
-        (direction === 'vertical' && this.#board[row + i][col] !== 'unattacked')
+        (direction === 'horizontal' && this.#board[row][col + i] !== null) ||
+        (direction === 'vertical' && this.#board[row + i][col] !== null)
       ) {
         return 'Ship overlaps another ship.';
       }
@@ -65,12 +62,12 @@ export default class Gameboard {
 
     if (cell instanceof Ship) {
       cell.hit();
-      this.#board[row][col] = 'hit';
-    } else {
-      this.#board[row][col] = 'miss';
     }
   }
-
+  
+  isShip(row, col) {
+    return this.#board[row][col] instanceof Ship;
+  }
   allShipsSunk() {
     if (this.#placedShips.length === 0) return false;
 
@@ -85,11 +82,18 @@ export default class Gameboard {
     return this.#board.map((row) => [...row]);
   }
 
-  getCellValue(row, col) {
-    return this.#board[row][col];
+
+  getCellState(row, col) {
+    if (!this.#attacked[(row, col)]) {
+      return 'unattacked';
+    } else if (this.#board[row][col] instanceof Ship) {
+      return 'hit';
+    } else {
+      return 'miss';
+    }
   }
 
   getPlacedShips() {
-    return[...this.#placedShips]
+    return [...this.#placedShips];
   }
 }
