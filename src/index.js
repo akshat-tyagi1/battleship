@@ -7,7 +7,7 @@ const gameInitializer = new GameInitializer();
 const playerGrid = document.querySelector('.set-player-grid');
 const shipSelection = document.querySelector('#ship-select');
 
-renderBoard(gameInitializer.getPlayer().getGameboard(), playerGrid);
+renderBoard(gameInitializer.getPlayer().getGameboard(), playerGrid, true);
 
 renderShipSelection(gameInitializer.getShips(), shipSelection);
 

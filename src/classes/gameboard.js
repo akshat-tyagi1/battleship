@@ -3,13 +3,14 @@ import Ship from './ship.js';
 export default class Gameboard {
   #board;
   #attacked;
+  #placedShips;
 
   constructor() {
     this.#board = Array.from({ length: 10 }, () =>
       Array(10).fill('unattacked'),
     );
     this.#attacked = Array.from({ length: 10 }, () => Array(10).fill(false));
-    this.ships = [];
+    this.#placedShips = [];
   }
 
   placeShip(row, col, length, direction, shipName) {
@@ -23,11 +24,11 @@ export default class Gameboard {
       }
     }
 
-    this.ships.push(ship);
+    this.#placedShips.push(ship);
   }
 
   canPlaceShip(row, col, length, direction, shipName) {
-    if(this.ships.some(ship => ship.getName() === shipName)) {
+    if(this.#placedShips.some(ship => ship.getName() === shipName)) {
       return "This ship has already placed."
     }
 
@@ -71,9 +72,9 @@ export default class Gameboard {
   }
 
   allShipsSunk() {
-    if (this.ships.length === 0) return false;
+    if (this.#placedShips.length === 0) return false;
 
-    return this.ships.every((ship) => ship.isSunk());
+    return this.#placedShips.every((ship) => ship.isSunk());
   }
 
   isAttacked(row, col) {
@@ -86,5 +87,9 @@ export default class Gameboard {
 
   getCellValue(row, col) {
     return this.#board[row][col];
+  }
+
+  getPlacedShips() {
+    return[...this.#placedShips]
   }
 }

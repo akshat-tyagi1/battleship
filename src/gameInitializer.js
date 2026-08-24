@@ -1,15 +1,15 @@
-import Player from './Classes/player.js';
-import { ComputerPlayer } from './Classes/player.js';
+import Player from './classes/player.js';
+import { ComputerPlayer } from './classes/player.js';
 
 export default class GameInitializer {
   #player;
   #computer;
-  #ships;
+  #shipsTypes;
 
   constructor() {
     this.#player = new Player();
     this.#computer = new ComputerPlayer();
-    this.#ships = [
+    this.#shipsTypes = [
       { name: 'carrier', length: 5 },
       { name: 'battleship', length: 4 },
       { name: 'destroyer', length: 3 },
@@ -27,10 +27,6 @@ export default class GameInitializer {
   }
 
   getShips() {
-    return [...this.#ships];
-  }
-
-  removeShip(index) {
-    this.#ships.splice(index, 1);
+    return [...this.#shipsTypes];
   }
 }

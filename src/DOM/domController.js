@@ -1,8 +1,8 @@
 import { gameInitializer, playerGrid, shipSelection } from '../index.js';
+import showPlacementError from '../helperFunctions/error.js';
+import handlePlacementSuccess from '../helperFunctions/handlePlacementSuccess.js';
 import renderBoard from './render/renderBoard.js';
-import renderShipSelection from './render/renderShipSelection.js';
-import showPlacementError from '../error.js';
-import handlePlacementSuccess from './handlePlacementSuccess.js';
+import placeComputerShip from '../helperFunctions/placeComputerShip.js';
 
 const initPLacementListeners = (function () {
   // handle the placeship page event listners
@@ -40,6 +40,7 @@ const initPLacementListeners = (function () {
     const player = gameInitializer.getPlayer();
     const gameboard = player.getGameboard();
 
+    // check for ship placement, return null if its placable else return error.
     const errorMessage = gameboard.canPlaceShip(
       selectionState.row,
       selectionState.col,
@@ -48,13 +49,16 @@ const initPLacementListeners = (function () {
       shipName,
     );
 
+    // show placement error on dom
     showPlacementError(
       errorMessage,
       document.querySelector('.placement-error'),
     );
 
+    // return if error is returned from canPlace Ship function
     if (errorMessage) return;
 
+    // place ship on the board
     gameboard.placeShip(
       selectionState.row,
       selectionState.col,
@@ -63,13 +67,43 @@ const initPLacementListeners = (function () {
       shipName,
     );
 
+    // update the dome after successfully placing the ship.
     handlePlacementSuccess(
       gameInitializer,
       gameboard,
       playerGrid,
       shipSelection,
-      shipName,
+      player,
       selectionState,
+    );
+  });
+
+  // play button eventlistner
+
+  document.querySelector('.play-button').addEventListener('click', () => {
+    // check if user placed all the ships.
+    const select = document.querySelector('#ship-select');
+    if (select.hasChildNodes()) return;
+
+    document.querySelector('.place-your-ship').classList.add('hidden');
+    document.querySelector('.main-container').classList.remove('hidden');
+
+    // place opponent ships
+    const ships = gameInitializer.getShips();
+    for (let i = 0; i < ships.length; i++) {
+      placeComputerShip(gameInitializer.getComputer().getGameboard(), ships[i]);
+    }
+
+    renderBoard(
+      gameInitializer.getPlayer().getGameboard(),
+      document.querySelector('.player-grid'),
+      true,
+    );
+
+    renderBoard(
+      gameInitializer.getComputer().getGameboard(),
+      document.querySelector('.opponent-grid'),
+      false,
     );
   });
 })();

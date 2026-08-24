@@ -1,4 +1,4 @@
-export default function renderBoard(gameBoard, domElement) {
+export default function renderBoard(gameBoard, domElement, revealShips) {
   domElement.innerHTML = '';
 
   for (let row = 0; row < 10; row++) {
@@ -11,8 +11,10 @@ export default function renderBoard(gameBoard, domElement) {
 
       if (typeof cellValue === 'string') {
         button.classList.add(cellValue);
-      } else {
+      } else if (revealShips) {
         button.classList.add('ship');
+      } else {
+        button.classList.add('unattacked')
       }
 
       button.dataset.row = row;

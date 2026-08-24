@@ -1,7 +1,6 @@
 export default function renderShipSelection(ships, select) {
   select.innerHTML = '';
   
-  console.log(ships);
   for (let i = 0; i < ships.length; i++) {
     const option = document.createElement('option');
 
