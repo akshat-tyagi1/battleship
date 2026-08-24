@@ -28,10 +28,17 @@ const initPLacementListeners = (function () {
 
   // place ship
   document.querySelector('.place-ship-button').addEventListener('click', () => {
-    if (selectionState.row === undefined || selectionState.col === undefined)
-      return;
-
     const select = document.querySelector('#ship-select');
+
+    if (!select.hasChildNodes()) {
+      showErrorAndStop('All The Ships Have Been Placed You Can Play Now.');
+      return;
+    }
+
+    if (selectionState.row === undefined || selectionState.col === undefined) {
+      showErrorAndStop('Select A Sqaure To Place The Ship');
+      return;
+    }
 
     const shipName = document.querySelector('#ship-select').value;
     const length = Number(select.selectedOptions[0].dataset.length);
@@ -50,10 +57,7 @@ const initPLacementListeners = (function () {
     );
 
     // show placement error on dom
-    showPlacementError(
-      errorMessage,
-      document.querySelector('.placement-error'),
-    );
+    showErrorAndStop(errorMessage);
 
     // return if error is returned from canPlace Ship function
     if (errorMessage) return;
@@ -83,7 +87,10 @@ const initPLacementListeners = (function () {
   document.querySelector('.play-button').addEventListener('click', () => {
     // check if user placed all the ships.
     const select = document.querySelector('#ship-select');
-    if (select.hasChildNodes()) return;
+    if (select.hasChildNodes()) {
+      showErrorAndStop('Place All Your Ships To Play');
+      return;
+    }
 
     document.querySelector('.place-your-ship').classList.add('hidden');
     document.querySelector('.main-container').classList.remove('hidden');
@@ -94,6 +101,7 @@ const initPLacementListeners = (function () {
       placeComputerShip(gameInitializer.getComputer().getGameboard(), ships[i]);
     }
 
+    // render boards
     renderBoard(
       gameInitializer.getPlayer().getGameboard(),
       document.querySelector('.player-grid'),
@@ -107,3 +115,7 @@ const initPLacementListeners = (function () {
     );
   });
 })();
+
+function showErrorAndStop(message) {
+  showPlacementError(message, document.querySelector('.placement-error'));
+}
