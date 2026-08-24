@@ -60,4 +60,8 @@ const initAttackListeners = (function () {
         return;
       }
     });
+
+  document.querySelector('.replay').addEventListener('click', () => {
+    location.reload();
+  });
 })();
