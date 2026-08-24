@@ -68,6 +68,7 @@ export default class Gameboard {
   isShip(row, col) {
     return this.#board[row][col] instanceof Ship;
   }
+
   allShipsSunk() {
     if (this.#placedShips.length === 0) return false;
 
@@ -84,7 +85,7 @@ export default class Gameboard {
 
 
   getCellState(row, col) {
-    if (!this.#attacked[(row, col)]) {
+    if (!this.#attacked[row][col]) {
       return 'unattacked';
     } else if (this.#board[row][col] instanceof Ship) {
       return 'hit';

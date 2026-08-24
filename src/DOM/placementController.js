@@ -4,7 +4,7 @@ import handlePlacementSuccess from '../helperFunctions/handlePlacementSuccess.js
 import renderBoard from './render/renderBoard.js';
 import placeComputerShip from '../helperFunctions/placeComputerShip.js';
 
-const initPLacementListeners = (function () {
+const initPlacementListeners = (function () {
   // handle the placeship page event listners
 
   const selectionState = { row: undefined, col: undefined, cell: undefined };

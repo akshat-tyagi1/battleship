@@ -15,7 +15,11 @@ body {
   align-items: center;
 
   font-family:
-    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 
   color: #e8f3f7;
 
@@ -27,7 +31,6 @@ body {
     ),
     linear-gradient(135deg, #071421, #020912);
 }
-
 
 /* =========================
    GENERAL
@@ -45,7 +48,6 @@ button {
 .hidden {
   display: none !important;
 }
-
 
 /* =========================
    PLACE YOUR SHIP
@@ -67,7 +69,6 @@ button {
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-
 /* =========================
    TITLE
 ========================= */
@@ -79,7 +80,6 @@ button {
 
   margin-bottom: 22px;
 }
-
 
 /* =========================
    SHIP LENGTH INFO
@@ -105,7 +105,6 @@ button {
   margin-bottom: 32px;
 }
 
-
 /* =========================
    GRID + CONTROLS
 ========================= */
@@ -118,7 +117,6 @@ button {
 
   align-items: center;
 }
-
 
 /* =========================
    BATTLESHIP GRID
@@ -144,7 +142,6 @@ button {
     inset 0 0 25px rgba(0, 0, 0, 0.15);
 }
 
-
 /* =========================
    CELLS
 ========================= */
@@ -169,7 +166,6 @@ button {
     transform 0.12s ease;
 }
 
-
 /* remove borders on final row/column */
 
 .cell:nth-child(10n) {
@@ -180,16 +176,13 @@ button {
   border-bottom: none;
 }
 
-
 /* hover */
 
 .cell:hover {
   background: #164354;
 
-  box-shadow:
-    inset 0 0 0 1px rgba(82, 214, 208, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(82, 214, 208, 0.5);
 }
-
 
 /* selected cell */
 
@@ -201,7 +194,6 @@ button {
     0 0 12px rgba(82, 214, 208, 0.35);
 }
 
-
 /* placed ship */
 
 .cell.ship {
@@ -211,7 +203,6 @@ button {
     inset 0 0 0 1px #79f2eb,
     inset 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
 
 /* =========================
    PLACEMENT CONTROLS
@@ -245,7 +236,6 @@ button {
     box-shadow 0.15s ease;
 }
 
-
 /* select */
 
 .placing-controls select {
@@ -262,10 +252,8 @@ button {
 
   border-color: #52d6d0;
 
-  box-shadow:
-    0 0 0 3px rgba(82, 214, 208, 0.12);
+  box-shadow: 0 0 0 3px rgba(82, 214, 208, 0.12);
 }
-
 
 /* =========================
    PLACE SHIP BUTTON
@@ -285,14 +273,12 @@ button {
 
   transform: translateY(-1px);
 
-  box-shadow:
-    0 8px 20px rgba(81, 212, 205, 0.2);
+  box-shadow: 0 8px 20px rgba(81, 212, 205, 0.2);
 }
 
 .place-ship-button:active {
   transform: translateY(0);
 }
-
 
 /* =========================
    PLAY BUTTON
@@ -311,7 +297,6 @@ button {
   border-color: #52d6d0;
 }
 
-
 /* =========================
    PLACEMENT ERROR
 ========================= */
@@ -329,7 +314,6 @@ button {
   font-weight: 600;
 }
 
-
 /* =========================
    BOTTOM LABEL
 ========================= */
@@ -341,7 +325,6 @@ button {
 
   font-size: 13px;
 }
-
 
 /* =========================
    GAMEPLAY
@@ -357,8 +340,7 @@ button {
   border: 1px solid rgba(87, 180, 210, 0.28);
   border-radius: 18px;
 
-  box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
 }
 
 .header h1 {
@@ -416,7 +398,6 @@ button {
   font-size: 13px;
 }
 
-
 /* =========================
    GAME RESULT
 ========================= */
@@ -470,7 +451,6 @@ button {
   cursor: pointer;
 }
 
-
 /* =========================
    RESPONSIVE
 ========================= */
@@ -508,4 +488,16 @@ button {
 
 .hidden {
   display: none;
+}
+
+.cell.hit {
+  background: #e05a5a; /* or whatever red/danger tone fits your theme */
+  box-shadow:
+    inset 0 0 0 1px #ff8a8a,
+    inset 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.cell.miss {
+  background: #2a4a56; /* a muted, "nothing here" tone, distinct from unattacked */
+  box-shadow: inset 0 0 0 1px rgba(155, 180, 191, 0.4);
 }
