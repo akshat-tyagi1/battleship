@@ -1,156 +1,62 @@
-# JavaScript Template
+# Battleship
 
-A reusable JavaScript project template with ESLint, Prettier, and VS Code settings already configured.
+A browser-based Battleship game built with JavaScript.
 
----
+## Preview
+
+![Battleship game preview](./assets/battleship-preview.png)
+
+## Live Demo
+
+[Play Battleship](https://akshat-tyagi1.github.io/battleship/)
 
 ## Features
 
-- ✅ ESLint (Flat Config)
-- ✅ Prettier
-- ✅ Format on Save
-- ✅ VS Code Workspace Settings
-- ✅ npm Scripts
-- ✅ Git Ready
+* 10×10 game boards
+* Manual ship placement
+* Horizontal and vertical ship placement
+* Random computer ship placement
+* Player vs computer gameplay
+* Hit and miss tracking
+* Win and lose detection
+* Replay functionality
+* Unit tests with Jest
 
----
+## Built With
 
-## Project Structure
+* HTML
+* CSS
+* JavaScript
+* Webpack
+* Jest
 
-```text
-js-template/
-├── src/
-│   └── index.js
-├── dist/
-├── .vscode/
-│   └── settings.json
-├── .gitignore
-├── .prettierignore
-├── .prettierrc
-├── eslint.config.js
-├── package.json
-└── README.md
+## How to Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/akshat-tyagi1/battleship.git
+cd battleship
 ```
 
----
-
-## Installation
-
-Clone the repository and install the dependencies.
+Install dependencies:
 
 ```bash
 npm install
 ```
 
----
-
-## Available Scripts
-
-### Lint the project
+Start the development server:
 
 ```bash
-npm run lint
+npm start
 ```
 
-Checks your JavaScript for errors and bad practices.
+## What I Learned
 
----
-
-### Automatically fix lint issues
-
-```bash
-npm run lint:fix
-```
-
-Fixes issues that ESLint can automatically resolve.
-
----
-
-### Format the project
-
-```bash
-npm run format
-```
-
-Formats every supported file using Prettier.
-
----
-
-### Check formatting
-
-```bash
-npm run format:check
-```
-
-Checks whether the project follows the configured Prettier rules.
-
----
-
-## Configuration
-
-### ESLint
-
-Configuration file:
-
-```text
-eslint.config.js
-```
-
-### Prettier
-
-Configuration file:
-
-```text
-.prettierrc
-```
-
-### VS Code
-
-Workspace settings:
-
-```text
-.vscode/settings.json
-```
-
-These settings automatically:
-
-- Format files on save.
-- Use Prettier as the default formatter.
-- Enable ESLint code actions.
-
----
-
-## Creating a New Project
-
-1. Click **Use this template** on GitHub.
-2. Give your new repository a name.
-3. Clone it.
-
-```bash
-git clone <repository-url>
-```
-
-4. Install dependencies.
-
-```bash
-npm install
-```
-
-5. Start coding.
-
----
-
-## Tech Stack
-
-- JavaScript
-- Node.js
-- npm
-- ESLint
-- Prettier
-- Git
-
----
-
-## License
-
-This project is free to use.
+* Structuring a JavaScript application using modules
+* Object-oriented programming with classes
+* Managing game state
+* DOM manipulation and event handling
+* Writing unit tests with Jest
+* Using Webpack to bundle a JavaScript application
+* Using ESLint and Prettier to maintain code quality
