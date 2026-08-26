@@ -1,7 +1,7 @@
 {
-  "name": "webpack-template",
+  "name": "battleship",
   "version": "1.0.0",
-  "description": "",
+  "description": "A browser-based Battleship game built with JavaScript.",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
